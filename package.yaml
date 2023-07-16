@@ -1,0 +1,69 @@
+name:                fiapo
+version:             0.1.0.0
+github:              "samueldurantes/fiapo"
+license:             MIT
+author:              "Samuel Durante"
+maintainer:          "samueldurante.h@gmail.com"
+copyright:           "2023 Samuel Durante"
+
+extra-source-files:
+- README.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/githubuser/fiapo#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- aeson
+- scotty
+- wai
+- wai-extra
+- mongoDB
+- bcrypt
+- text
+- bytestring
+- http-types
+
+default-extensions:
+- OverloadedStrings
+- OverloadedRecordDot
+- DeriveGeneric
+- CPP
+- ExtendedDefaultRules
+- ScopedTypeVariables
+- FlexibleContexts
+- NamedFieldPuns
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+
+executables:
+  fiapo-exe:
+    main:                Main.hs
+    source-dirs:         src
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+
+tests:
+  fiapo-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
