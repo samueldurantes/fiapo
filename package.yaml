@@ -22,6 +22,7 @@ dependencies:
 - base >= 4.7 && < 5
 - aeson
 - scotty
+- warp
 - wai
 - wai-extra
 - mongoDB
@@ -29,6 +30,10 @@ dependencies:
 - text
 - bytestring
 - http-types
+- hspec
+- hspec-wai-json
+- hspec-discover
+- hspec-wai
 
 default-extensions:
 - OverloadedStrings
@@ -50,20 +55,20 @@ ghc-options:
 - -Wpartial-fields
 - -Wredundant-constraints
 
+library:
+  source-dirs: src
+
 executables:
   fiapo-exe:
     main:                Main.hs
-    source-dirs:         src
+    source-dirs:         app
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    dependencies: fiapo
 
 tests:
-  fiapo-test:
-    main:                Spec.hs
-    source-dirs:         test
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+  spec:
+    defaults: hspec/hspec@main
+    dependencies: fiapo
