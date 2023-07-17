@@ -18,8 +18,5 @@ app = do
   liftIO $ scottyApp $ do
     middleware logStdoutDev
 
-    get "/" $ do
-      text "hello"
-
     post "/user/register" (userRegister (run conn))
     post "/user/login" (userLogin (run conn))

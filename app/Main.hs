@@ -5,4 +5,6 @@ import Network.Wai.Handler.Warp (run)
 import App (app)
 
 main :: IO ()
-main = run 3000 =<< app
+main = do
+  putStrLn "Server running on port 3000"
+  run 3000 =<< app
