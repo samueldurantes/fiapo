@@ -33,14 +33,21 @@ dependencies:
 - hspec
 - hspec-wai-json
 - hspec-discover
+- mtl
 - hspec-wai
+- transformers
 
 default-extensions:
 - OverloadedStrings
 - OverloadedRecordDot
+- DuplicateRecordFields
 - DeriveGeneric
 - CPP
+- RankNTypes
+- ImportQualifiedPost
 - ExtendedDefaultRules
+- ConstraintKinds
+- LambdaCase
 - ScopedTypeVariables
 - FlexibleContexts
 - NamedFieldPuns

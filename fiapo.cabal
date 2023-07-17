@@ -23,11 +23,16 @@ source-repository head
 
 library
   exposed-modules:
-      App
-      Modules.User.Controllers
-      Modules.User.Model
-      Modules.User.Repository
-      Utils
+      Fiapo.App
+      Fiapo.Modules.User.Controller
+      Fiapo.Modules.User.Entities.Password
+      Fiapo.Modules.User.Entities.User
+      Fiapo.Modules.User.Error
+      Fiapo.Modules.User.Repository
+      Fiapo.Modules.User.Routes
+      Fiapo.Modules.User.UseCases.Login
+      Fiapo.Modules.User.UseCases.Register
+      Fiapo.Shared.Monad.Controller
   other-modules:
       Paths_fiapo
   hs-source-dirs:
@@ -35,9 +40,14 @@ library
   default-extensions:
       OverloadedStrings
       OverloadedRecordDot
+      DuplicateRecordFields
       DeriveGeneric
       CPP
+      RankNTypes
+      ImportQualifiedPost
       ExtendedDefaultRules
+      ConstraintKinds
+      LambdaCase
       ScopedTypeVariables
       FlexibleContexts
       NamedFieldPuns
@@ -53,8 +63,10 @@ library
     , hspec-wai-json
     , http-types
     , mongoDB
+    , mtl
     , scotty
     , text
+    , transformers
     , wai
     , wai-extra
     , warp
@@ -69,9 +81,14 @@ executable fiapo-exe
   default-extensions:
       OverloadedStrings
       OverloadedRecordDot
+      DuplicateRecordFields
       DeriveGeneric
       CPP
+      RankNTypes
+      ImportQualifiedPost
       ExtendedDefaultRules
+      ConstraintKinds
+      LambdaCase
       ScopedTypeVariables
       FlexibleContexts
       NamedFieldPuns
@@ -88,8 +105,10 @@ executable fiapo-exe
     , hspec-wai-json
     , http-types
     , mongoDB
+    , mtl
     , scotty
     , text
+    , transformers
     , wai
     , wai-extra
     , warp
@@ -106,9 +125,14 @@ test-suite spec
   default-extensions:
       OverloadedStrings
       OverloadedRecordDot
+      DuplicateRecordFields
       DeriveGeneric
       CPP
+      RankNTypes
+      ImportQualifiedPost
       ExtendedDefaultRules
+      ConstraintKinds
+      LambdaCase
       ScopedTypeVariables
       FlexibleContexts
       NamedFieldPuns
@@ -125,8 +149,10 @@ test-suite spec
     , hspec-wai-json
     , http-types
     , mongoDB
+    , mtl
     , scotty
     , text
+    , transformers
     , wai
     , wai-extra
     , warp
