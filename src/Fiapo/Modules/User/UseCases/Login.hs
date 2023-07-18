@@ -14,11 +14,11 @@ userLogin :: (MonadIO m, MonadFail m)
              => Query m a (Maybe Mongo.Document)
              -> User -> m (Either Error User)
 userLogin runConn user = do
-    u <- runConn $ findUserByUsername user.username
-    case u of
-        Just userStored -> do
-            hashedPassword <- look "password" userStored
-            if verifyPassword (typed hashedPassword) user.password
-                then pure (Right user)
-                else pure (Left IncorrectPassword)
-        Nothing -> pure (Left (UserNotExists user))
+  u <- runConn $ findUserByUsername user.username
+  case u of
+    Just userStored -> do
+        hashedPassword <- look "password" userStored
+        if verifyPassword (typed hashedPassword) user.password
+            then pure (Right user)
+            else pure (Left IncorrectPassword)
+    Nothing -> pure (Left (UserNotExists user))

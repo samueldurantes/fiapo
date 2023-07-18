@@ -1,6 +1,5 @@
-{-- This module exposes a controller monad that is useful to send messages and errors to the client.
---}
-module Fiapo.Shared.Monad.Controller (MonadUseCase, Failable (..)) where
+{-- This module exposes a controller monad that is useful to send messages and errors to the client. --}
+module Fiapo.Shared.Monad.Controller (MonadUseCase, Failable (..), run) where
 
 import Control.Monad.Except (MonadError, MonadIO, runExceptT)
 import Data.Aeson           (ToJSON)
