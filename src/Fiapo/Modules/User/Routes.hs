@@ -1,7 +1,7 @@
 module Fiapo.Modules.User.Routes (routes) where
 
-import Web.Scotty (ScottyM, get, text)
+import Web.Scotty (post)
+import Fiapo.Modules.User.Controller (login)
 
-routes :: ScottyM ()
-routes = do
-  get "/users" (text "users")
+routes runConn = do
+  post "/user/login" (login runConn)

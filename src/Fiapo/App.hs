@@ -8,7 +8,7 @@ import Database.MongoDB                     (Action, Pipe, access, connect,
                                              host, master)
 import Network.Wai                          (Application)
 import Network.Wai.Middleware.RequestLogger (logStdoutDev)
-import Web.Scotty                           (get, middleware, scottyApp, text)
+import Web.Scotty                           (middleware, scottyApp)
 
 import Fiapo.Modules.User.Routes            qualified as User
 
@@ -17,12 +17,9 @@ run conn = access conn master "fiapo"
 
 app :: (MonadIO m) => m Application
 app = do
-  _conn <- liftIO $ connect (host "127.0.0.1")
+  conn <- liftIO $ connect (host "127.0.0.1")
 
   liftIO $ scottyApp $ do
     middleware logStdoutDev
 
-    get "/" $ do
-      text "hello"
-
-    User.routes
+    User.routes (run conn)
