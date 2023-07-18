@@ -1,4 +1,4 @@
-module Fiapo.Modules.User.Controller (login) where
+module Fiapo.Modules.User.Controller (register, login) where
 
 import Data.Aeson                        (decode)
 import Data.Aeson.Types                  (ToJSON)
@@ -9,7 +9,8 @@ import Fiapo.Modules.User.UseCases.Login (userLogin)
 import Fiapo.Shared.Monad.Controller     (run)
 import Fiapo.Modules.User.Error          (Error(..))
 import Control.Monad.Except              (throwError)
-import Web.Scotty                        (body, json)
+import Web.Scotty                        (body, json, status)
+import Network.HTTP.Types                (created201)
 
 import qualified Fiapo.Modules.User.Entities.User as User
 
@@ -27,6 +28,23 @@ data Response = Response
 
 instance ToJSON UserResponse
 instance ToJSON Response
+
+register runConn = do
+  b <- body
+  case decode b of
+    Just (user :: User) -> do
+      r <- userLogin runConn user
+      case r of
+        Left e  -> run (throwError e)
+        -- TODO: improve this
+        Right u -> do
+          status created201
+          json $ Response
+            { message = "User successfully registered!"
+            , user = UserResponse { username = User.username u }
+            , token = Nothing
+            }
+    Nothing -> run (throwError RequestBodyMalformed)
 
 login runConn = do
   b <- body
