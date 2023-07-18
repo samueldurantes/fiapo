@@ -1,12 +1,10 @@
 module Fiapo.Modules.User.Error where
 
-import Data.Aeson                       (ToJSON (..))
-import Data.Aeson.Types                 (object)
-import Data.Text                        (Text)
-import Fiapo.Modules.User.Entities.User
+import Fiapo.Modules.User.Entities.User (User)
 import Fiapo.Shared.Monad.Controller    (Failable (..))
 import GHC.Generics                     (Generic)
-import Network.HTTP.Types
+import Data.Aeson                       (ToJSON(toJSON), object, KeyValue((.=)) )
+import Network.HTTP.Types               (badRequest400, notFound404, unauthorized401)
 
 data Error
   = RequestBody
@@ -21,6 +19,9 @@ toResponse = \case
     IncorrectPassword    -> "Incorrect password"
     UserNotExists user   -> "User " <> show user <> " not exists"
     RequestBodyMalformed -> "Request body is malformed"
+
+instance ToJSON Error where
+  toJSON t = object [ "message" .= toResponse t ]
 
 instance Failable Error where
   statusCode = \case
