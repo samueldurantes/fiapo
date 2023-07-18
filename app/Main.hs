@@ -1,8 +1,7 @@
 module Main where
 
+import Fiapo.App (app)
 import Network.Wai.Handler.Warp (run)
-
-import App (app)
 
 main :: IO ()
 main = do

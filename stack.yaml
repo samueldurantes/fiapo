@@ -31,6 +31,10 @@ resolver:
 #   - wai
 packages:
 - .
+
+extra-deps:
+- ghc-lib-parser-9.6.2.20230523@sha256:160fc11671ce69e756d67f42a75c564863f59b81782a3d23efc27a845d61041b
+- ghc-lib-parser-ex-9.6.0.0@sha256:52e6ffb031669183ebfcff373a5cf0d89eb7621151d3822d80b5a2cce9123871
 # Dependency packages to be pulled from upstream that are not in the resolver.
 # These entries can reference officially published versions as well as
 # forks / in-progress versions pinned to a git hash. For example:
